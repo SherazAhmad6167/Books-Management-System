@@ -1,0 +1,23 @@
+<div class="container mt-4 text-black-50 " *ngIf="book">
+    <h2>Book Details</h2>
+    <div class=" mb-3">
+      <div class="row g-2">
+        <div class=" col-md-4" *ngIf="book.image">
+          <img [src]="'http://localhost:8000/'+book.image" class="img-fluid rounded-start" alt="Book Cover">
+        </div>
+        <div class=" col-md-8 mt-5 ml-8">
+          <div class="card-body">
+            <h5 class="card-text"><strong>Title:</strong>{{ book.title }}</h5>
+            <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+            <p class="card-text"><strong>Category:</strong> {{ book.category }}</p>
+            <p class="card-text"><strong>Year:</strong> {{ book.year }}</p>
+            <p class="card-text"><strong>Description:</strong></p>
+            <p class="card-text">{{ book.description }}</p>
+            <button routerLink="/books" class="btn btn-primary">
+              <i class="bi bi-arrow-left"></i> Back to List
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

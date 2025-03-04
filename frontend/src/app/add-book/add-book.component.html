@@ -1,0 +1,80 @@
+<div class="container mt-4 text-black ">
+  <h2 class="modal-title d-flex justify-content-center">{{ bookId ? "Update" : "Add" }} Book</h2>
+  <div class="d-flex justify-content-center">
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div class="  ">
+      <div class="">
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-control" formControlName="title" />
+          <div *ngIf="
+              bookForm.get('title')?.invalid && bookForm.get('title')?.touched
+            " class="text-danger">
+            Title is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Author</label>
+          <input type="text" class="form-control" formControlName="author" />
+          <div *ngIf="
+              bookForm.get('author')?.invalid && bookForm.get('author')?.touched
+            " class="text-danger">
+            Author is required
+          </div>
+        </div>
+
+        <div class="mb-3 ">
+          <label class="form-label ">Category</label>
+          <div class="d-flex gap-3" >
+          <div  *ngFor="let category of categories" class="form-check">
+            <input type="radio" class="form-check-input" 
+                   [id]="category" [value]="category" formControlName="category">
+            <label class="form-check-label" [for]="category">{{ category }}</label>
+          </div>
+        </div>
+          <div *ngIf="
+              bookForm.get('category')?.invalid &&
+              bookForm.get('category')?.touched
+            " class="text-danger">
+            Category is required
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="mb-3">
+          <label class="form-label">Year</label>
+          <select class="form-select" formControlName="year">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>          <div *ngIf="
+              bookForm.get('year')?.invalid && bookForm.get('year')?.touched
+            " class="text-danger">
+            Valid year is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Image</label>
+          <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
+          <div *ngIf="bookForm.get('image')?.value">
+            <img [src]="bookForm.get('image')?.value" class="img-fluid mt-2" alt="Book Cover" width="150" />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea class="form-control" formControlName="description" rows="4"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid">
+      Save
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" routerLink="/books">
+      Cancel
+    </button>
+  </form>
+  </div>
+</div>
